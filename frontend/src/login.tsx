@@ -1,16 +1,6 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
-import "./App.css";
 
-const Home: React.FC = () => {
-  const navigate = useNavigate();
-
-const App: React.FC = () => {
+const login: React.FC = () => {
   const navigateToPage = (boxNumber: number) => {
     const pages: { [key: number]: string } = {
       1: "/announcement.html",
@@ -19,12 +9,12 @@ const App: React.FC = () => {
       4: "/voting",
       5: "/booking",
       6: "/more",
-      9: "/src/login.tsx",
-      10: "/signup", // You can update this as needed
+      9: "/login",
+      10: "/signup",
     };
 
-    const path = pages[boxNumber];
-    if (path) navigate(path);
+    const url = pages[boxNumber];
+    if (url) window.location.href = url;
   };
 
   return (
@@ -36,17 +26,6 @@ const App: React.FC = () => {
             <img src="/house.png" alt="Home icon" className="logo" />
             <h1 className="title">Neighborly</h1>
           </header>
-
-          {/* Login/Signup */}
-          <div className="auth-buttons">
-            <button className="auth-btn" onClick={() => navigateToPage(9)}>
-              Log in
-            </button>
-            <span className="divider">|</span>
-            <button className="auth-btn" onClick={() => navigateToPage(10)}>
-              Sign up
-            </button>
-          </div>
 
           {/* Icon Grid */}
           <div
@@ -156,4 +135,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default login;
