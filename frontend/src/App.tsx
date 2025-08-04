@@ -1,3 +1,4 @@
+// src/App.tsx
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -6,21 +7,23 @@ import {
   useNavigate,
 } from "react-router-dom";
 import "./App.css";
+import Login from "./login"; // Make sure this file exists
+// import Signup from "./Signup"; // Signup page not implemented
 
+// 🏠 Home component
 const Home: React.FC = () => {
   const navigate = useNavigate();
 
-const App: React.FC = () => {
   const navigateToPage = (boxNumber: number) => {
     const pages: { [key: number]: string } = {
-      1: "/announcement.html",
+      1: "/announcement",
       2: "/report",
       3: "/billing",
       4: "/voting",
       5: "/booking",
       6: "/more",
-      9: "/src/login.tsx",
-      10: "/signup", // You can update this as needed
+      9: "/login",
+      10: "/signup",
     };
 
     const path = pages[boxNumber];
@@ -58,84 +61,33 @@ const App: React.FC = () => {
               marginBottom: "20px",
             }}
           >
-            <button className="grid-btn" onClick={() => navigateToPage(1)}>
-              <img
-                src="/announcement.png"
-                alt="Announcements"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Announcements</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(2)}>
-              <img
-                src="/report.png"
-                alt="Report"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Report</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(3)}>
-              <img
-                src="/billing.png"
-                alt="Billing"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Billing</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(4)}>
-              <img
-                src="/voting.png"
-                alt="Voting"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Voting</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(5)}>
-              <img
-                src="/booking.png"
-                alt="Booking"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Booking</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(6)}>
-              <img
-                src="/more.png"
-                alt="More"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>More</p> */}
-            </button>
+            {[1, 2, 3, 4, 5, 6].map((num) => (
+              <button
+                key={num}
+                className="grid-btn"
+                onClick={() => navigateToPage(num)}
+              >
+                <img
+                  src={`/${
+                    [
+                      "announcement",
+                      "report",
+                      "billing",
+                      "voting",
+                      "booking",
+                      "more",
+                    ][num - 1]
+                  }.png`}
+                  alt={`Icon ${num}`}
+                  style={{
+                    display: "block",
+                    margin: "0 auto",
+                    width: 32,
+                    height: 32,
+                  }}
+                />
+              </button>
+            ))}
           </div>
 
           {/* Footer */}
@@ -153,6 +105,25 @@ const App: React.FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+// 🌐 App with routes
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/signup" element={<Signup />} /> Signup route removed */}
+        <Route
+          path="/announcement"
+          element={<div>Announcement Page (Coming Soon)</div>}
+        />
+        {/* Optional */}
+        {/* You can add more routes as needed */}
+      </Routes>
+    </Router>
   );
 };
 
