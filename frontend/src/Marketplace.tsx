@@ -35,10 +35,12 @@ const Marketplace: React.FC = () => {
 
           {/* Popular Searches */}
           <div className="px-4 mb-4">
-            <p className="mb-2 text-sm">Popular searches</p>
-            <div className="flex gap-3">
+            <p className="search_text">Popular searches</p>
+            <div className="flex_box_marketplace">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="w-12 h-12 rounded-md bg-[#6a7884]" />
+                <div key={i} className="popular-box">
+                  {i}
+                </div>
               ))}
             </div>
           </div>
@@ -47,17 +49,19 @@ const Marketplace: React.FC = () => {
 
           {/* Sell Items */}
           <div className="p-4">
-            <button className="w-full bg-[#d2a98d] text-black py-2 rounded-md flex items-center justify-center gap-2 font-semibold">
-              <img src="/camera.png" alt="camera icon" className="logo"></img>
-              SELL ITEMS
+            <button className="sell-button">
+              <img
+                src="/camera.png"
+                alt="camera icon"
+                className="camera-icon"
+              />
+              <span>SELL ITEMS</span>
             </button>
           </div>
 
           {/* Advertisements */}
-          <div className="px-4 mb-2">
-            <div className="bg-[#b6c3ce] w-full py-6 rounded-xl text-center font-medium text-black text-lg">
-              advertisements
-            </div>
+          <div className="advertisement-container">
+            <div className="advertisement-box">advertisements</div>
           </div>
 
           {/* Pagination Dots */}
