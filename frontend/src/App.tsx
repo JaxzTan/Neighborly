@@ -11,6 +11,7 @@ import Login from "./login"; // Make sure this file exists
 // import Signup from "./Signup"; // Signup page not implemented
 import BookingForm from "./BookingForm"; // ✅ Adjust path if needed
 import Marketplace from "./Marketplace";
+import VotingPage from "./VotingPage";
 
 // 🏠 Home component
 const Home: React.FC = () => {
@@ -121,6 +122,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/booking" element={<BookingForm />} />
         <Route path="/marketplace" element={<Marketplace />} />
+        <Route path="/voting" element={<VotingPage />} />
 
         {/* <Route path="/signup" element={<Signup />} /> Signup route removed */}
         <Route
