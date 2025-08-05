@@ -73,6 +73,27 @@ html,
   height: 48px;
   margin-left: 15px;
 }
+.logo_menu {
+  width: 32px;
+  height: 32px;
+  margin-left: -10px;
+  margin-top: -25px;
+}
+.logo_messenger {
+  width: 32px;
+  height: 32px;
+  margin-right: -10px;
+  margin-top: -25px;
+}
+
+.homepage {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  transition: opacity 0.2s;
+  opacity: 0.8;
+}
 
 .title {
   font-size: 35px;
@@ -139,4 +160,57 @@ html,
   font-size: 18px;
   color: #ddd;
   line-height: 1.4;
+}
+
+.booking_title {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.booking_form {
+  display: flex;
+  background-color: #cfd6dc;
+  padding: 20px;
+  border-radius: 12px;
+  color: #3a3d3f;
+}
+.booking_form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.messenger_icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #3a3d3f;
+  font-size: 24px;
+  cursor: pointer;
+}
+.title_marketplace {
+  font-family: "Londrina Shadow", cursive;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #d1d9e3;
+  margin-top: -10px;
+}
+.relative {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+}
+.searchbox {
+  width: 90%;
+  padding: 8px;
+  border-radius: 12px;
+  align-items: center;
+  border: black 4px solid;
+  background-color: #e0e3e7;
+  color: #333;
+  font-size: 16px;
 }

@@ -22,8 +22,13 @@ const login: React.FC = () => {
       <div className="phone-frame">
         <div className="phone-screen">
           {/* App Header */}
-          <header className="app-header">
-            <img src="/house.png" alt="Home icon" className="logo" />
+          <header className="app-header flex items-center gap-2">
+            <button
+              onClick={() => (window.location.href = "/")}
+              className="homepage"
+            >
+              <img src="/house.png" alt="Home icon" className="logo" />
+            </button>
             <h1 className="title">Neighborly</h1>
           </header>
 

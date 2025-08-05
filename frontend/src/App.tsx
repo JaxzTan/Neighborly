@@ -9,6 +9,8 @@ import {
 import "./App.css";
 import Login from "./login"; // Make sure this file exists
 // import Signup from "./Signup"; // Signup page not implemented
+import BookingForm from "./BookingForm"; // ✅ Adjust path if needed
+import Marketplace from "./Marketplace";
 
 // 🏠 Home component
 const Home: React.FC = () => {
@@ -17,7 +19,7 @@ const Home: React.FC = () => {
   const navigateToPage = (boxNumber: number) => {
     const pages: { [key: number]: string } = {
       1: "/announcement",
-      2: "/report",
+      2: "/marketplace",
       3: "/billing",
       4: "/voting",
       5: "/booking",
@@ -35,8 +37,10 @@ const Home: React.FC = () => {
       <div className="phone-frame">
         <div className="phone-screen">
           {/* App Header */}
-          <header className="app-header">
-            <img src="/house.png" alt="Home icon" className="logo" />
+          <header className="app-header flex items-center gap-2">
+            <button onClick={() => navigate("/")} className="homepage">
+              <img src="/house.png" alt="Home icon" className="logo" />
+            </button>
             <h1 className="title">Neighborly</h1>
           </header>
 
@@ -71,7 +75,7 @@ const Home: React.FC = () => {
                   src={`/${
                     [
                       "announcement",
-                      "report",
+                      "marketplace",
                       "billing",
                       "voting",
                       "booking",
@@ -115,6 +119,9 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/booking" element={<BookingForm />} />
+        <Route path="/marketplace" element={<Marketplace />} />
+
         {/* <Route path="/signup" element={<Signup />} /> Signup route removed */}
         <Route
           path="/announcement"
