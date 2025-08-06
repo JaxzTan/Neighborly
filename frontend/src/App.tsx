@@ -12,6 +12,7 @@ import Login from "./login"; // Make sure this file exists
 import BookingForm from "./BookingForm"; // ✅ Adjust path if needed
 import Marketplace from "./Marketplace";
 import VotingPage from "./VotingPage";
+import Billing from "./Billing";
 
 // 🏠 Home component
 const Home: React.FC = () => {
@@ -123,6 +124,7 @@ const App: React.FC = () => {
         <Route path="/booking" element={<BookingForm />} />
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/voting" element={<VotingPage />} />
+        <Route path="/Billing" element={<Billing />} />
 
         {/* <Route path="/signup" element={<Signup />} /> Signup route removed */}
         <Route
