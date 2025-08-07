@@ -1,1 +1,5 @@
 .vscode
+pnpm-workspace.yaml
+config.json
+node_modules/
+zkLogin.tsx
