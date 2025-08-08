@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <button id="login-btn">Login with Google</button>
+    <script type="module">
+      import { initGoogleAuth } from './auth-provider.js';
+      import { createZkLoginSession } from './zklogin.js';
+      window.createZkLoginSession = createZkLoginSession; // Make it global for demo
+      initGoogleAuth();
+    </script>
+  </body>
+</html>

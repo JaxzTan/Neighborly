@@ -1,0 +1,7 @@
+=== zkLogin Results ===
+{
+  salt: '0xf7eb808911509648d52e148b6ffa9c88',
+  ephemeralPublicKey: '0xe55830deef87d6917025780f...',
+  suiAddress: '0xe5dbf5266be827729a33a90a...',
+  jwt: 'eyJhbGciOiJSUzI1NiIs...'
+}
