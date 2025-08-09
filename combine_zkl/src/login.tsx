@@ -53,26 +53,24 @@ export default function Login() {
   };
 
   React.useEffect(() => {
-    // 5️⃣ When redirected back from Google
-    const hash = window.location.hash;
-    if (hash.includes("id_token")) {
-      const params = new URLSearchParams(hash.replace("#", "?"));
-      const idToken = params.get("id_token");
-      if (idToken) {
-        // Decode JWT
-        const decoded = jwtDecode<JwtPayload>(idToken);
-        console.log("Decoded JWT:", decoded);
+  const hash = window.location.hash;
+  if (hash.includes("id_token")) {
+    const params = new URLSearchParams(hash.replace("#", "?"));
+    const idToken = params.get("id_token");
+    if (idToken) {
+      const decoded = jwtDecode<JwtPayload>(idToken);
+      console.log("Decoded JWT:", decoded);
 
-        // Here you’d get userSalt from your backend
-        const userSalt = "YOUR_USER_SALT";
+      // ✅ FIXED: Fetch salt from backend or generate ephemeral salt
+      const userSalt = generateRandomness().toString(); // Temp for demo
+      // const userSalt = await fetchSaltFromBackend(); // Real implementation
 
-        // Get zkLogin address
-        const zkAddress = jwtToAddress(idToken, userSalt);
-        console.log("zkLogin Address:", zkAddress);
-        setUserAddress(zkAddress);
-      }
+      const zkAddress = jwtToAddress(idToken, userSalt);
+      console.log("zkLogin Address:", zkAddress);
+      setUserAddress(zkAddress);
     }
-  }, []);
+  }
+}, []);
 
   return (
     <div>
