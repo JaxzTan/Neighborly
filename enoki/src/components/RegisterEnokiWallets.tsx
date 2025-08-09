@@ -9,11 +9,11 @@ export default function RegisterEnokiWallets() {
     if (!isEnokiNetwork(network)) return;
 
     const { unregister } = registerEnokiWallets({
-      apiKey: "YOUR_PUBLIC_ENOKI_API_KEY",
+      apiKey: import.meta.env.VITE_ENOKI_API_KEY,
       providers: {
         // Provide the client IDs for each of the auth providers you want to use:
         google: {
-          clientId: "YOUR_GOOGLE_CLIENT_ID",
+          clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
         },
         facebook: {
           clientId: "YOUR_FACEBOOK_CLIENT_ID",
