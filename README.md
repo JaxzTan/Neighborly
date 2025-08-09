@@ -91,7 +91,7 @@ Traditional community and event platforms face issues like centralization, high 
 
 ## 🧪 Technology Stack
 
-- **Blockchains:* Sui  
+- **Blockchains:** Sui  
 - **Identity:** Worldcoin, ENS, WorldID  
 - **Payments:** USDC, Superfluid, Crypto wallets, Smart contract escrow  
 - **Governance:** Aragon SDK, on-chain voting & execution  
