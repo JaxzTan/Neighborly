@@ -129,7 +129,7 @@ As communities and events grow increasingly digital, trust, privacy, and transpa
 
 ## 👥 Contributors
 
-[Your Name / Team Name] — Creator & Developer
+Young Dream — Creator & Developer
 
 ---
 
