@@ -1,4 +1,5 @@
 import { registerEnokiWallets } from '@mysten/enoki';
+import { SuiClient, getFullnodeUrl } from '@mysten/sui.js';
  
 const suiClient = new SuiClient({ url: getFullnodeUrl('testnet') });
  
