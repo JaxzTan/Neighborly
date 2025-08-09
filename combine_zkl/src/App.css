@@ -590,6 +590,7 @@ html,
 .announcement-date {
   color: #4a6072;
   font-weight: normal;
+  font-size: 12px;
 }
 
 .announcement-content {

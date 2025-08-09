@@ -1,23 +1,7 @@
-// src/App.tsx
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
-import "./App.css";
-import Login from "./login"; // Make sure this file exists
-// import Signup from "./Signup"; // Signup page not implemented
-import BookingForm from "./BookingForm"; // ✅ Adjust path if needed
-import Marketplace from "./Marketplace";
-import VotingPage from "./VotingPage";
-import Billing from "./Billing";
-import Announcements from "./Announcement";
-import AfterLogin from "./afterlogin"; // Import AfterLogin component
+import { useNavigate } from "react-router-dom";
 
-// 🏠 Home component
-const Home: React.FC = () => {
+const AfterLogin: React.FC = () => {
   const navigate = useNavigate();
 
   const navigateToPage = (boxNumber: number) => {
@@ -47,17 +31,6 @@ const Home: React.FC = () => {
             </button>
             <h1 className="title">Neighborly</h1>
           </header>
-
-          {/* Login/Signup */}
-          <div className="auth-buttons">
-            <button className="auth-btn" onClick={() => navigateToPage(9)}>
-              Log in
-            </button>
-            <span className="divider">|</span>
-            <button className="auth-btn" onClick={() => navigateToPage(9)}>
-              Sign up
-            </button>
-          </div>
 
           {/* Icon Grid */}
           <div
@@ -116,22 +89,4 @@ const Home: React.FC = () => {
   );
 };
 
-// 🌐 App with routes
-const App: React.FC = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/booking" element={<BookingForm />} />
-        <Route path="/marketplace" element={<Marketplace />} />
-        <Route path="/voting" element={<VotingPage />} />
-        <Route path="/Billing" element={<Billing />} />
-        <Route path="/announcement" element={<Announcements />} />
-        <Route path="/afterlogin" element={<AfterLogin />} />
-      </Routes>
-    </Router>
-  );
-};
-
-export default App;
+export default AfterLogin;

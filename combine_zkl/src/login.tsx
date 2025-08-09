@@ -1,6 +1,6 @@
-// src/login.tsx
-import React, { useState } from "react";
-import { jwtDecode } from "jwt-decode";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode"; // default import
 import { SuiClient, getFullnodeUrl } from "@mysten/sui/client";
 import { Ed25519Keypair } from "@mysten/sui/keypairs/ed25519";
 import {
@@ -21,6 +21,7 @@ interface JwtPayload {
 
 export default function Login() {
   const [userAddress, setUserAddress] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     // 1️⃣ Connect to Sui
@@ -34,14 +35,14 @@ export default function Login() {
     const ephemeralKeyPair = new Ed25519Keypair();
     const randomness = generateRandomness();
     const nonce = generateNonce(
-      ephemeralKeyPair.getPublicKey(), // ✅ FIXED: pass PublicKey, not bytes
+      ephemeralKeyPair.getPublicKey(), // pass PublicKey
       maxEpoch,
       randomness
     );
 
     console.log("Nonce:", nonce);
 
-    // 4️⃣ Redirect to Google login (replace CLIENT_ID & redirect)
+    // 4️⃣ Redirect to Google login
     const clientId =
       "828657040441-banrovfmrahqtekfs33201q9q7j7afb1.apps.googleusercontent.com";
     const redirectUri = window.location.origin + "/login";
@@ -52,25 +53,27 @@ export default function Login() {
     window.location.href = authUrl;
   };
 
-  React.useEffect(() => {
-  const hash = window.location.hash;
-  if (hash.includes("id_token")) {
-    const params = new URLSearchParams(hash.replace("#", "?"));
-    const idToken = params.get("id_token");
-    if (idToken) {
-      const decoded = jwtDecode<JwtPayload>(idToken);
-      console.log("Decoded JWT:", decoded);
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash.includes("id_token")) {
+      const params = new URLSearchParams(hash.replace("#", "?"));
+      const idToken = params.get("id_token");
+      if (idToken) {
+        const decoded = jwtDecode<JwtPayload>(idToken);
+        console.log("Decoded JWT:", decoded);
 
-      // ✅ FIXED: Fetch salt from backend or generate ephemeral salt
-      const userSalt = generateRandomness().toString(); // Temp for demo
-      // const userSalt = await fetchSaltFromBackend(); // Real implementation
+        // Temporary salt — replace with backend fetch if needed
+        const userSalt = generateRandomness().toString();
 
-      const zkAddress = jwtToAddress(idToken, userSalt);
-      console.log("zkLogin Address:", zkAddress);
-      setUserAddress(zkAddress);
+        const zkAddress = jwtToAddress(idToken, userSalt);
+        console.log("zkLogin Address:", zkAddress);
+        setUserAddress(zkAddress);
+
+        // Redirect after login
+        navigate("/afterlogin");
+      }
     }
-  }
-}, []);
+  }, [navigate]);
 
   return (
     <div>
