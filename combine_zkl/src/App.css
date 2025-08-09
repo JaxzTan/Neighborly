@@ -64,8 +64,6 @@ html,
   margin-right: -15px;
   background-color: var(--color-primary);
   background-position: auto;
-
-  /* To add blur behind the header, use backdrop-filter: blur(8px); if supported: */
 }
 
 .logo {
@@ -250,9 +248,9 @@ html,
 .sell-button {
   width: 85%;
   display: flex;
-  align-items: center; /* vertically center text and image */
-  justify-content: center; /* center text and image horizontally */
-  gap: 0.5rem; /* spacing between image and text */
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1rem;
   background-color: white;
   border: none;
@@ -260,7 +258,7 @@ html,
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
   cursor: pointer;
-  margin: 0 auto; /* center horizontally */
+  margin: 0 auto;
   margin-top: 1.5rem;
 }
 
@@ -279,23 +277,23 @@ html,
   color: #333;
 }
 .advertisement-container {
-  padding-left: 1rem; /* px-4 */
+  padding-left: 1rem;
   padding-right: 1rem;
-  margin-top: 2rem; /* ⬅️ Adds spacing from top element */
-  margin-bottom: 0.5rem; /* mb-2 */
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .advertisement-box {
   background-color: #b6c3ce;
   width: 100%;
-  height: 6rem; /* h-24 */
-  padding-top: 1.5rem; /* py-6 */
+  height: 6rem;
+  padding-top: 1.5rem;
   padding-bottom: 1.5rem;
-  border-radius: 0.75rem; /* rounded-xl */
+  border-radius: 0.75rem;
   text-align: center;
-  font-weight: 500; /* font-medium */
+  font-weight: 500;
   color: black;
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1.125rem;
 }
 .poll-container {
   background-color: #cfd6dc;
@@ -331,7 +329,7 @@ html,
 }
 .booking-subtitle {
   margin-top: 0.75rem;
-  font-size: 0.875rem; /* Tailwind text-sm */
+  font-size: 0.875rem;
 }
 
 .booking-title {
@@ -340,7 +338,7 @@ html,
 }
 
 .booking-title h2 {
-  font-size: 1.5rem; /* Tailwind text-2xl */
+  font-size: 1.5rem;
   font-weight: bold;
   letter-spacing: 0.05em;
 }
@@ -360,7 +358,7 @@ html,
 .form-label {
   display: block;
   font-size: 0.875rem;
-  color: black; /* Tailwind red-400 */
+  color: black;
   margin-bottom: 0.25rem;
 }
 
@@ -450,7 +448,7 @@ html,
 .billing-options {
   margin-top: 2.5rem;
   background-color: #cfd6dc;
-  border-radius: 0.75rem 0.75rem 0.75rem 0.75rem;
+  border-radius: 0.75rem;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -500,4 +498,101 @@ html,
 }
 .billing-balance-content {
   text-align: center;
+}
+
+.page-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Announcements */
+.announcement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.announcement-container {
+  color: black;
+}
+
+/* Make announcement cards stand out with white-screen background, black text */
+.phone-screen .announcement-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 8px;
+  color: black; /* Ensures all text inside is black by default */
+}
+
+/* Title inside announcement card: black and bold */
+.phone-screen .announcement-card h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: black; /* explicit black for title */
+}
+
+/* Date text: smaller and gray */
+.phone-screen .announcement-card .announcement-date {
+  font-size: 14px;
+  color: gray;
+}
+.sidebar {
+  width: 300px;
+  background-color: #455a70;
+  border-radius: 15px 0 0 15px;
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 16px;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.sidebar-header {
+  background-color: #d5dbde;
+  border-radius: 15px 15px 0 0;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: black;
+  font-weight: bold;
+  font-size: 22px;
+  user-select: none;
+}
+
+.announcements-title {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.announcement-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 16px;
+  height: 100px;
+  color: black;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.announcement-date {
+  color: #4a6072;
+  font-weight: normal;
+}
+
+.announcement-content {
+  margin-top: 8px;
+  color: #222;
 }

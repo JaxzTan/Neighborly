@@ -1,143 +1,84 @@
-import React from "react";
+// src/login.tsx
+import React, { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { SuiClient, getFullnodeUrl } from "@mysten/sui/client";
+import { Ed25519Keypair } from "@mysten/sui/keypairs/ed25519";
+import {
+  generateNonce,
+  generateRandomness,
+  jwtToAddress,
+} from "@mysten/sui/zklogin";
 
-const login: React.FC = () => {
-  const navigateToPage = (boxNumber: number) => {
-    const pages: { [key: number]: string } = {
-      1: "/announcement.html",
-      2: "/report",
-      3: "/billing",
-      4: "/voting",
-      5: "/booking",
-      6: "/more",
-      9: "/login",
-      10: "/signup",
-    };
+interface JwtPayload {
+  iss?: string;
+  sub?: string;
+  aud?: string[] | string;
+  exp?: number;
+  nbf?: number;
+  iat?: number;
+  jti?: string;
+}
 
-    const url = pages[boxNumber];
-    if (url) window.location.href = url;
+export default function Login() {
+  const [userAddress, setUserAddress] = useState<string | null>(null);
+
+  const handleLogin = async () => {
+    // 1️⃣ Connect to Sui
+    const suiClient = new SuiClient({ url: getFullnodeUrl("devnet") });
+
+    // 2️⃣ Get latest epoch info
+    const { epoch } = await suiClient.getLatestSuiSystemState();
+    const maxEpoch = Number(epoch) + 2;
+
+    // 3️⃣ Generate ephemeral keys + randomness + nonce
+    const ephemeralKeyPair = new Ed25519Keypair();
+    const randomness = generateRandomness();
+    const nonce = generateNonce(
+      ephemeralKeyPair.getPublicKey(), // ✅ FIXED: pass PublicKey, not bytes
+      maxEpoch,
+      randomness
+    );
+
+    console.log("Nonce:", nonce);
+
+    // 4️⃣ Redirect to Google login (replace CLIENT_ID & redirect)
+    const clientId =
+      "828657040441-banrovfmrahqtekfs33201q9q7j7afb1.apps.googleusercontent.com";
+    const redirectUri = window.location.origin + "/login";
+    const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(
+      redirectUri
+    )}&response_type=id_token&scope=openid%20email&nonce=${nonce}`;
+
+    window.location.href = authUrl;
   };
 
+  React.useEffect(() => {
+    // 5️⃣ When redirected back from Google
+    const hash = window.location.hash;
+    if (hash.includes("id_token")) {
+      const params = new URLSearchParams(hash.replace("#", "?"));
+      const idToken = params.get("id_token");
+      if (idToken) {
+        // Decode JWT
+        const decoded = jwtDecode<JwtPayload>(idToken);
+        console.log("Decoded JWT:", decoded);
+
+        // Here you’d get userSalt from your backend
+        const userSalt = "YOUR_USER_SALT";
+
+        // Get zkLogin address
+        const zkAddress = jwtToAddress(idToken, userSalt);
+        console.log("zkLogin Address:", zkAddress);
+        setUserAddress(zkAddress);
+      }
+    }
+  }, []);
+
   return (
-    <div className="phone-wrapper">
-      <div className="phone-frame">
-        <div className="phone-screen">
-          {/* App Header */}
-          <header className="app-header flex items-center gap-2">
-            <button
-              onClick={() => (window.location.href = "/")}
-              className="homepage"
-            >
-              <img src="/house.png" alt="Home icon" className="logo" />
-            </button>
-            <h1 className="title">Neighborly</h1>
-          </header>
-
-          {/* Icon Grid */}
-          <div
-            className="icon-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "10px",
-              marginBottom: "20px",
-            }}
-          >
-            <button className="grid-btn" onClick={() => navigateToPage(1)}>
-              <img
-                src="/announcement.png"
-                alt="Announcements"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Announcements</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(2)}>
-              <img
-                src="/report.png"
-                alt="Report"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Report</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(3)}>
-              <img
-                src="/billing.png"
-                alt="Billing"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Billing</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(4)}>
-              <img
-                src="/voting.png"
-                alt="Voting"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Voting</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(5)}>
-              <img
-                src="/booking.png"
-                alt="Booking"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>Booking</p> */}
-            </button>
-            <button className="grid-btn" onClick={() => navigateToPage(6)}>
-              <img
-                src="/more.png"
-                alt="More"
-                style={{
-                  display: "block",
-                  margin: "0 auto",
-                  width: 32,
-                  height: 32,
-                }}
-              />
-              {/* <p>More</p> */}
-            </button>
-          </div>
-
-          {/* Footer */}
-          <div className="footer">
-            <h2>
-              Build Trust Where
-              <br />
-              It Matters Most
-            </h2>
-            <p>
-              Blockchain powered platform for private communities to manage
-              data, payments, and voting – without a central admin.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div>
+      <h1>zkLogin with Google</h1>
+      <button onClick={handleLogin}>Login with Google</button>
+      {userAddress && <p>Your zkLogin Address: {userAddress}</p>}
     </div>
   );
-};
-
-export default login;
+}

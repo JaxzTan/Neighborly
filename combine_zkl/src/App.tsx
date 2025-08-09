@@ -13,6 +13,7 @@ import BookingForm from "./BookingForm"; // ✅ Adjust path if needed
 import Marketplace from "./Marketplace";
 import VotingPage from "./VotingPage";
 import Billing from "./Billing";
+import Announcements from "./Announcement";
 
 // 🏠 Home component
 const Home: React.FC = () => {
@@ -125,14 +126,7 @@ const App: React.FC = () => {
         <Route path="/marketplace" element={<Marketplace />} />
         <Route path="/voting" element={<VotingPage />} />
         <Route path="/Billing" element={<Billing />} />
-
-        {/* <Route path="/signup" element={<Signup />} /> Signup route removed */}
-        <Route
-          path="/announcement"
-          element={<div>Announcement Page (Coming Soon)</div>}
-        />
-        {/* Optional */}
-        {/* You can add more routes as needed */}
+        <Route path="/announcement" element={<Announcements />} />
       </Routes>
     </Router>
   );
